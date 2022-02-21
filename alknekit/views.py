@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 
-from .models import Products
+from .models import Products, Images
 
 
 def index(request):

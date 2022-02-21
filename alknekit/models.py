@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.postgres.fields import ArrayField
 
 
 class accounts(models.Model):
@@ -19,7 +20,12 @@ class Products(models.Model):
     subcategory = models.ForeignKey(Category, default=None, on_delete=models.CASCADE)
     tittle = models.CharField(max_length=50)
     articul = models.CharField(unique=True, max_length=75)
-    images = models.ImageField()
-    price = models.IntegerField(default=0)
+    price = models.FloatField(default=0)
+    mainimage = models.ImageField(default=None, null=False,upload_to='static/images/products')
     def __str__(self):
         return self.tittle
+
+class Images(models.Model):
+    articul = models.ForeignKey(Products, on_delete=models.CASCADE)
+    image = models.ImageField()
+
