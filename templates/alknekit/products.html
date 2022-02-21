@@ -1,0 +1,12 @@
+{% extends 'alknekit/index.html' %}
+{% load static %}
+{% block products %}
+    {% for i in obj %}
+        <a class="block" href="#">
+            <div class="image-block"><img src="{% static 'images/products/' %}{{ i.images }}" alt=""></div>
+            <div class="title"><p>{{ i.tittle }}</p></div>
+            <div class="price"><span>{{ i.price }}₽</span></div>
+            <div class="buybutton"><button id="btn-buy"><i class="fa fa-shopping-basket"></i></button></div>
+        </a>
+    {% endfor %}
+{% endblock %}
