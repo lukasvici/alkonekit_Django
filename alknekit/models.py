@@ -18,9 +18,9 @@ class Category(models.Model):
 
 class Products(models.Model):
     subcategory = models.ForeignKey(Category, default=None, on_delete=models.CASCADE)
-    tittle = models.CharField(max_length=50)
-    articul = models.CharField(unique=True, max_length=75)
-    price = models.FloatField(default=0)
+    tittle = models.CharField(max_length=200)
+    newprice = models.FloatField(default=0)
+    oldprice = models.FloatField(default=0)
     mainimage = models.ImageField(default=None, null=False,upload_to='static/images/products')
     main = models.IntegerField(default=0)
     rate = models.IntegerField(default=0)

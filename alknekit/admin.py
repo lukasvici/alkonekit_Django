@@ -4,8 +4,8 @@ from .models import accounts, Products, Category
 class ProductsAddAdmin(admin.ModelAdmin):
     fieldsets = [
         (None,{'fields':['tittle']}),
-        ('Артикул',{'fields':['articul']}),
-        ('Цена',{'fields':['price']}),
+        ('Новая Цена',{'fields':['newprice']}),
+        ('Старая Цена',{'fields':['oldprice']}),
         ('Подкатегория',{'fields':['subcategory']}),
         ('Картинка',{'fields':['mainimage']}),
         ('Объем', {'fields': ['Value']}),

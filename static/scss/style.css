@@ -406,7 +406,7 @@ header {
   border-bottom: 1px solid #E5E5E5;
   overflow: hidden;
   width: 24%;
-  height: 100%;
+  height: auto;
 }
 
 .sales .flex-sales .block:nth-child(2) {
