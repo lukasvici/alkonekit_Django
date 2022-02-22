@@ -11,10 +11,10 @@ class accounts(models.Model):
 
 class Category(models.Model):
     Category = models.CharField(max_length=50)
-    Subcategory = models.CharField(max_length=50, unique=True)
+    Subcategory = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.Subcategory
+        return self.Category + " " + self.Subcategory
 
 class Products(models.Model):
     subcategory = models.ForeignKey(Category, default=None, on_delete=models.CASCADE)
@@ -22,10 +22,8 @@ class Products(models.Model):
     articul = models.CharField(unique=True, max_length=75)
     price = models.FloatField(default=0)
     mainimage = models.ImageField(default=None, null=False,upload_to='static/images/products')
+    main = models.IntegerField(default=0)
+    rate = models.IntegerField(default=0)
+    Value = models.FloatField(default=None)
     def __str__(self):
-        return self.tittle
-
-class Images(models.Model):
-    articul = models.ForeignKey(Products, on_delete=models.CASCADE)
-    image = models.ImageField()
-
+        return self.tittle + " " + str(self.main)

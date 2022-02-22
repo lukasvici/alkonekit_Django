@@ -1,19 +1,18 @@
 from django.contrib import admin
-from .models import accounts, Products, Category, Images
-
-class ImagesInline(admin.StackedInline):
-    model = Images
-    extra = 3
+from .models import accounts, Products, Category
 
 class ProductsAddAdmin(admin.ModelAdmin):
     fieldsets = [
         (None,{'fields':['tittle']}),
-        ('Articul',{'fields':['articul']}),
-        ('price',{'fields':['price']}),
-        ('subcategory',{'fields':['subcategory']}),
-        ('Main Image',{'fields':['mainimage']}),
+        ('Артикул',{'fields':['articul']}),
+        ('Цена',{'fields':['price']}),
+        ('Подкатегория',{'fields':['subcategory']}),
+        ('Картинка',{'fields':['mainimage']}),
+        ('Объем', {'fields': ['Value']}),
+        ('id Сортировка',{'fields':['main']}),
     ]
-    inlines = [ImagesInline]
+    list_display = ('tittle', 'subcategory', 'main')
+    list_filter = ('main',)
 admin.site.register(accounts)
 admin.site.register(Products, ProductsAddAdmin)
 admin.site.register(Category)
