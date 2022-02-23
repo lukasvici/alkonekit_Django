@@ -1,13 +1,6 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
-
-
-class accounts(models.Model):
-    login = models.CharField(default=None, unique=True, max_length=16)
-    email = models.CharField(unique=True, max_length=50)
-    password = models.CharField(max_length=16)
-    def __str__(self):
-        return self.login
+from django.utils.safestring import mark_safe
 
 class Category(models.Model):
     Category = models.CharField(max_length=50)
@@ -25,5 +18,12 @@ class Products(models.Model):
     main = models.IntegerField(default=0)
     rate = models.IntegerField(default=0)
     Value = models.FloatField(default=None)
+    def image_tag(self):
+        if self.mainimage:
+            return mark_safe('<img src="%s" style="width: 70px; height:100px;" />' % self.mainimage.url)
+        else:
+            return 'No Image Found'
+    image_tag.short_description = 'Image'
     def __str__(self):
         return self.tittle + " " + str(self.main)
+

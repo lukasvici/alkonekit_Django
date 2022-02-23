@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import accounts, Products, Category
+from .models import Products, Category
 
 class ProductsAddAdmin(admin.ModelAdmin):
     fieldsets = [
@@ -7,13 +7,13 @@ class ProductsAddAdmin(admin.ModelAdmin):
         ('Новая Цена',{'fields':['newprice']}),
         ('Старая Цена',{'fields':['oldprice']}),
         ('Подкатегория',{'fields':['subcategory']}),
-        ('Картинка',{'fields':['mainimage']}),
         ('Объем', {'fields': ['Value']}),
         ('id Сортировка',{'fields':['main']}),
+        ('Картинка', {'fields': ['mainimage']}),
     ]
-    list_display = ('tittle', 'subcategory', 'main')
-    list_filter = ('main',)
-admin.site.register(accounts)
+    list_display = ('tittle', 'subcategory', 'main','image_tag')
+    list_filter = ('main','subcategory',)
+    readonly_fields = ('image_tag',)
 admin.site.register(Products, ProductsAddAdmin)
 admin.site.register(Category)
 # Register your models here.

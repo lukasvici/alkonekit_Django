@@ -6,7 +6,7 @@ from .models import Products
 
 
 def index(request):
-    obj = Products.objects.filter(main=3)[:4]
+    obj = Products.objects.filter(main=3)[:0]
     context = {
         'obj':obj,
     }
