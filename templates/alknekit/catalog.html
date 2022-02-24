@@ -5,8 +5,8 @@
     <div class="container sales">
     <div class="flex-sales">
         {% for i in obj %}
-            <a class="block" href="#">
-                <div class="image-block"><img src="{{ i.mainimage }}" alt=""></div>
+            <a class="block" href="#" style="border: 1px solid #E5E5E5;margin: 5px;">
+                <div class="image-block"><img src="../../{{ i.mainimage }}" alt=""></div>
             <div class="title"><p>{{ i.tittle }}</p></div>
             <div class="bottom">
                 <div class="price"><span>{{ i.newprice }}₽</span></div>
