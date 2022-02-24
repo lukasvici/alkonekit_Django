@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <link rel="stylesheet" href="{% static '/scss/style.css' %}">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
+    <link type="image/x-icon" rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+    <title>nekitverst</title>
+</head>
+<body>
+    <div class="main_box">
+        <div class="sidebar_menu" id="menu">
+            <div class="menu-top">
+                <div class="search">
+                    <input type="search" placeholder="Поиск...">
+                    <button class="search-confirm"><i class="fas fa-search icon-search"></i></button>
+                </div>
+                <button class="btn-menu" id="_close" onClick="closeSlideMenu()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="menu-title">Категории</div>
+            <hr>
+            <div v-for="(item, index) in category" class="product" :id="'cat_'+index">
+              <div>
+                  <div v-html="category[index]"></div>
+                <button @click="openSub(index)" :id="'btno_'+index"><i class="fas fa-caret-square-down"></i></button>
+                <button @click="closeSub(index)" :id="'btnc_'+index" style="display: none;"><i class="fas fa-minus-square"></i></button>
+              </div>
+              <div v-html="subcategory[index]" class="subcategory" :id="'sub_'+index"></div>
+            </div>
+        </div>
+    </div>
+    <header>
+        <div class="container flex-header">
+            <div class="logo-search">
+                <div class="logo"><a href="#"><img src="../../static/images/alkonekitlogo.svg" alt="" srcset=""></a></div>
+            </div>
+            <div class="socs-cart">
+                <button class="cart" id="cart">
+                    <i class="fas fa-shopping-cart icon-cart"></i>
+                    <b>100₽</b>
+                </button>
+                <button class="btn-menu" id="_open" onClick="openSlideMenu()"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+    {% block products %}
+    {% endblock %}
+    <script src="{% static '/js/main.js' %}"></script>
+    <script src="{% static '/js/menu.js' %}"></script>
+</body>
+</html>

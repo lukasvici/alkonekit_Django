@@ -1,10 +1,8 @@
+{#Здесь верстка страницы с товарами#}
 {% extends 'alknekit/header.html' %}
 {% load static %}
-
-
 {% block products %}
-<div class="container sales">
-    <p class="sales-title">Скидки</p>
+    <div class="container sales">
     <div class="flex-sales">
         {% for i in obj %}
             <a class="block" href="#">
@@ -17,6 +15,5 @@
         </a>
         {% endfor %}
     </div>
-</div>
+    </div>
 {% endblock %}
-
