@@ -1,7 +1,5 @@
-from django.http import HttpResponse
 from django.shortcuts import render
-
-
+from django.core.paginator import Paginator
 from .models import Products, Category
 
 
@@ -9,14 +7,15 @@ def index(request):
     obj = Products.objects.filter(main=3)[:4]
     category = Category.objects.filter()
     context = {
-        "cat":category,
-        'obj':obj,
+        "cat": category,
+        'obj': obj,
     }
     return render(request, "../templates/alknekit/index.html", context)
 
+
 def list_products(request, category_id):
-    obj = Products.objects.filter(subcategory=category_id)[:20]
-    context = {
-        'obj': obj,
-    }
-    return render(request, "../templates/alknekit/catalog.html", context)
+    products = Products.objects.filter(subcategory=category_id)
+    page = request.GET.get("page", 1)
+    paginator = Paginator(products, 20)
+    obj = paginator.page(page)
+    return render(request, "../templates/alknekit/catalog.html", {"obj": obj})
