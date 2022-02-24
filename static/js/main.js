@@ -1,22 +1,8 @@
-const hr = {
-    data() {
-      return {
-        products: ["Пиво жадетское", "Водка Мароша", "Водка океан","пять озер"],
-        category: ["Вина","Пиво","Шампанское","Алкоголь", "Vape","Промтовары"]
-      }
-    },
-    methods:{
-        test(){
-            console.log("sdfa")
-        }
-    }
-  }
-Vue.createApp(hr).mount('#hr')
 const menu = {
   data() {
     return {
-      subcategory: ['<a href="#">1</a><a href="#">2</a><a href="#">1</a>'],
-      category: ["Вина","Пиво","Шампанское","Алкоголь", "Vape","Промтовары"]
+      category: ['<a href="#">Вино</a>','<a href="#">Пиво</a>','<a href="#">Алкоголь</a>',],
+      subcategory: ['<a href="#">Красное</a><a href="#">Розовое</a><a href="#">Белое</a>'],
     }
   },
   methods: {
