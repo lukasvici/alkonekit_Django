@@ -1,17 +1,23 @@
 from django.db import models
 from django.utils.safestring import mark_safe
 
-
 class Category(models.Model):
-    Category = models.CharField(max_length=50)
+    title = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.title
+
+class Subcategory(models.Model):
+    Category = models.ForeignKey(Category, default=None, on_delete=models.CASCADE)
     Subcategory = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.Category + " " + self.Subcategory
+        return self.Category.title + " " + self.Subcategory
 
 
 class Products(models.Model):
-    subcategory = models.ForeignKey(Category, default=None, on_delete=models.CASCADE)
+    subcategory = models.ForeignKey(Subcategory, default=None, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, default=None, on_delete=models.CASCADE)
     tittle = models.CharField(max_length=200)
     newprice = models.FloatField(default=0)
     oldprice = models.FloatField(default=0)
