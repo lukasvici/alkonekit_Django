@@ -5,7 +5,7 @@
     <div class="container sales">
     <div class="flex-sales">
         {% for i in obj %}
-            <a class="block" href="{{ i.id }}" style="border: 1px solid #E5E5E5;margin: 5px;">
+            <a class="block" href="../../product/{{ i.id }}" style="border: 1px solid #E5E5E5;margin: 5px;">
                 <div class="image-block"><img src="../../{{ i.mainimage }}" alt=""></div>
             <div class="title"><p style="text-align: justify">{{ i.tittle }}</p></div>
             <div class="bottom">

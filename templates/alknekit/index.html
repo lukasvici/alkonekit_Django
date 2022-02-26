@@ -7,7 +7,7 @@
     <p class="title" style="text-align: center">Скидки</p>
     <div class="flex-sales">
         {% for i in obj %}
-            <a class="block" href="catalog/{{ i.subcategory_id }}/{{ i.id }}">
+            <a class="block" href="../../product/{{ i.id }}">
                 <div class="image-block"><img src="{{ i.mainimage }}" alt=""></div>
             <div class="title"><p style="text-align: justify">{{ i.tittle }}</p></div>
             <div class="bottom">

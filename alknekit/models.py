@@ -25,6 +25,7 @@ class Products(models.Model):
     main = models.IntegerField(default=0)
     rate = models.IntegerField(default=0)
     Value = models.FloatField(default=None)
+    description = models.TextField(null=True)
 
     def image_tag(self):
         if self.mainimage:
