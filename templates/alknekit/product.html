@@ -1,0 +1,37 @@
+{% extends "alknekit/header.html" %}
+{% block products %}
+    {% for i in obj %}
+    <div class="container product-flex">
+            <div class="image_block">
+                <img src="../../{{ i.mainimage }}" alt="product">
+            </div>
+            <div class="product-block">
+                <p class="title">{{ i.tittle }}</p>
+                <div class="price">
+                    {% if i.oldprice != 0 %}
+                    <div class="WrapOldPrice">
+                        <img src="../../static/images/red_line_price.png" alt="red-line">
+                        <span class="old">{{ i.oldprice }}₽</span>
+                    </div>
+                    {% endif %}
+                    <span class="new">{{ i.newprice }}₽</span>
+                </div>
+                <div class="BasketPreview">
+                    <div class="countPreview">
+                        <a href=""><i class="fas fa-minus"></i></a>
+                        <span>1</span>
+                        <a href=""><i class="fas fa-plus"></i></a>
+                    </div>
+                    <button class="btn-buy">
+                        <i class="fas fa-shopping-basket"></i>
+                        <span>Добавить в корзину</span>
+                    </button>
+                </div>
+                <div class="description">
+                    <h2>Описание</h2>
+                    <p>{{ i.description }}</p>
+                </div>
+            </div>
+    </div>
+    {% endfor %}
+{% endblock %}

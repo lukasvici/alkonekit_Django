@@ -29,6 +29,13 @@ body .btn-menu:hover i {
   color: #ACACAC;
 }
 
+body .title {
+  font-size: 30px;
+  font-family: 'Roboto', sans-serif;
+  color: #ACACAC;
+  margin-bottom: 3%;
+}
+
 a {
   color: black;
   text-decoration: none;
@@ -381,14 +388,6 @@ header {
   margin-top: 5%;
 }
 
-.sales .sales-title {
-  text-align: center;
-  font-size: 30px;
-  font-family: 'Roboto', sans-serif;
-  color: #ACACAC;
-  margin-bottom: 3%;
-}
-
 .sales .flex-sales {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
@@ -403,12 +402,15 @@ header {
 }
 
 .sales .flex-sales .block {
-  display: flex;
-  flex-wrap: wrap;
   border-bottom: 1px solid #E5E5E5;
   overflow: hidden;
   width: 24%;
   height: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .sales .flex-sales .block:nth-child(2) {
@@ -444,17 +446,7 @@ header {
   transition: transform .3s;
   transition: transform .3s, -webkit-transform .3s;
 }
-.sales .flex-sales .block .bottom {
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: end;
-  width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-}
+
 .sales .flex-sales .block .title {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -466,14 +458,30 @@ header {
       -ms-flex-pack: center;
           justify-content: center;
   padding: 13px;
+  width: 90%;
+  margin: 0 auto;
 }
 
 .sales .flex-sales .block .title p {
   text-transform: uppercase;
   font: 17px "SegoeUIRegular";
   color: black;
+  font-weight: 900px;
   color: #ACACAC;
   margin: 0;
+  width: 100%;
+}
+
+.sales .flex-sales .block .bottom {
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: end;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .sales .flex-sales .block .bottom .price {
@@ -529,12 +537,129 @@ header {
   color: white;
 }
 
+.product-flex {
+  margin-top: 100px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.product-flex .product-block {
+  width: 40%;
+}
+
+.product-flex .product-block .title {
+  width: 100%;
+}
+
+.product-flex .product-block .price {
+  margin-top: 5%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 35%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.product-flex .product-block .price .WrapOldPrice {
+  position: relative;
+}
+
+.product-flex .product-block .price .WrapOldPrice img {
+  position: absolute;
+  left: -6px;
+  width: 130% !important;
+  top: 3px;
+}
+
+.product-flex .product-block .price .WrapOldPrice .old {
+  color: #ACACAC;
+  font-size: x-large;
+}
+
+.product-flex .product-block .price .new {
+  font-weight: bolder;
+  color: red;
+  font-size: xx-large;
+}
+
+.product-flex .product-block .BasketPreview {
+  margin-top: 2%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.product-flex .product-block .BasketPreview .btn-buy {
+  font-family: 'Roboto Condensed', sans-serif;
+  border: 1px solid #FF6060;
+  background-color: #FF6060;
+  border-radius: 15px;
+  padding: 5px 10px 5px 10px;
+  font-size: large;
+  color: white;
+}
+
+.product-flex .product-block .BasketPreview .btn-buy:focus {
+  color: #FF6060;
+  background-color: white;
+}
+
+.product-flex .product-block .BasketPreview .countPreview {
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  border-radius: 15px;
+  border: 1px solid #ACACAC;
+  width: 10%;
+  color: #ACACAC;
+  margin-right: 5%;
+  padding: 0 5px 0 5px;
+}
+
+.product-flex .product-block .BasketPreview .countPreview i {
+  font-size: small;
+  color: #ACACAC;
+}
+
+.product-flex .product-block .description {
+  margin-top: 10%;
+  font-family: 'Roboto', sans-serif;
+}
+
+.product-flex .product-block .description h2 {
+  color: #676767;
+}
+
+.product-flex .product-block .description p {
+  text-align: justify;
+  font-weight: bold;
+  color: #ACACAC;
+}
+
 @media screen and (max-width: 1440px) {
   .sales .flex-sales .block .title p {
     font-size: 18px;
   }
   .sales {
     margin-top: 8%;
+  }
+  .product-flex .product-block .price {
+    width: 45%;
   }
 }
 
@@ -552,6 +677,29 @@ header {
   .sales {
     margin-top: 10%;
   }
+  .product-flex .product-block .price {
+    width: 100%;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: center;
+  }
+  .product-flex .product-block .BasketPreview{
+    justify-content: center;
+  }
+  .product-flex .product-block .price .WrapOldPrice{
+    margin-right: 20px;
+  }
+  .product-flex {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+  .product-flex .image_block {
+    text-align: center;
+    width: 100%;
+  }
+  .product-flex .product-block {
+  width: 100%;
+}
 }
 
 @media screen and (max-width: 778px) {

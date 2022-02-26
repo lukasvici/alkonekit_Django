@@ -82,7 +82,7 @@ DATABASES = {
         'NAME': 'alkonekitDB',
         'USER': 'admin',
         'PASSWORD': '1234',
-        'HOST': '34.132.251.88',
+        'HOST': '127.0.0.1',
         'PORT': '5432',
     }
 }
