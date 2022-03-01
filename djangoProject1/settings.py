@@ -82,10 +82,11 @@ DATABASES = {
         'NAME': 'alkonekitDB',
         'USER': 'admin',
         'PASSWORD': '1234',
-        'HOST': '127.0.0.1',
+        'HOST': '34.132.251.88',
         'PORT': '5432',
     }
 }
+SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 
 
 # Password validation

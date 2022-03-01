@@ -7,14 +7,14 @@ class ProductsAddAdmin(admin.ModelAdmin):
         (None, {'fields': ['tittle']}),
         ('Новая Цена', {'fields': ['newprice']}),
         ('Старая Цена', {'fields': ['oldprice']}),
+        ('категория', {'fields': ['category']}),
         ('Подкатегория', {'fields': ['subcategory']}),
         ('Объем', {'fields': ['Value']}),
         ('id Сортировка', {'fields': ['main']}),
         ('Картинка', {'fields': ['mainimage']}),
     ]
-    list_display = ('tittle', 'subcategory', 'main', 'image_tag')
+    list_display = ('tittle', 'subcategory', 'main', "image_tag")
     list_filter = ('main', 'subcategory',)
-    readonly_fields = ('image_tag',)
 
 
 admin.site.register(Products, ProductsAddAdmin)

@@ -3,16 +3,18 @@ from django.utils.safestring import mark_safe
 
 class Category(models.Model):
     title = models.CharField(max_length=50)
+    title_url = models.CharField(max_length=50, null=True)
 
     def __str__(self):
         return self.title
 
 class Subcategory(models.Model):
     Category = models.ForeignKey(Category, default=None, on_delete=models.CASCADE)
-    Subcategory = models.CharField(max_length=50)
+    title = models.CharField(max_length=50)
+    title_url = models.CharField(max_length=50, null=True)
 
     def __str__(self):
-        return self.Category.title + " " + self.Subcategory
+        return self.Category.title + " " + self.title
 
 
 class Products(models.Model):

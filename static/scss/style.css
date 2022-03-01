@@ -190,6 +190,9 @@ a {
 .main_box .sidebar_menu .product .subcategory {
   overflow: hidden;
   display: none;
+  margin-left: 15px;
+  padding-top: 8px;
+  line-height: 1.5;
 }
 
 .main_box .sidebar_menu .product .subcategory a {
