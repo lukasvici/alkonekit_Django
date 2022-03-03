@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://unpkg.com/vue@next"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <link rel="stylesheet" href="{% static '/scss/style.css' %}">
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
@@ -24,14 +23,22 @@
             </div>
             <div class="menu-title">Категории</div>
             <hr>
-            <div v-for="(item, index) in category" class="product" :id="'cat_'+index">
+            {% for cat in category %}
+            <div class="product" id="cat_{{ cat.id }}">
               <div>
-                  <div v-html="category[index]"></div>
-                <button @click="openSub(index)" :id="'btno_'+index"><i class="fas fa-caret-square-down"></i></button>
-                <button @click="closeSub(index)" :id="'btnc_'+index" style="display: none;"><i class="fas fa-minus-square"></i></button>
+                  <div><a href="../../Catalog/{{ cat.title_url }}">{{ cat.title }}</a></div>
+                <button onClick="openSub({{ cat.id }})" id='btno_{{ cat.id }}'><i class="fas fa-caret-square-down"></i></button>
+                <button onClick="closeSub({{ cat.id }})" id='btnc_{{ cat.id }}' style="display: none;"><i class="fas fa-minus-square"></i></button>
               </div>
-              <div v-html="subcategory[index]" class="subcategory" :id="'sub_'+index"></div>
+              <div class="subcategory" id="sub_{{ cat.id }}">
+                  {% for sub in subcategory %}
+                      {% if cat.id == sub.Category_id%}
+                      <a href="../../Catalog/{{ cat.title_url }}/{{ sub.title_url }}">{{ sub.title }}</a>
+                      {% endif %}
+                  {% endfor %}
+              </div>
             </div>
+            {% endfor %}
         </div>
     </div>
     <header>
@@ -50,7 +57,6 @@
     </header>
     {% block products %}
     {% endblock %}
-    <script src="{% static '/js/main.js' %}"></script>
     <script src="{% static '/js/menu.js' %}"></script>
 </body>
 </html>
