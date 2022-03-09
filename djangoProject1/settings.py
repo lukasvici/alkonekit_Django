@@ -78,12 +78,8 @@ WSGI_APPLICATION = 'djangoProject1.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'alkonekitDB',
-        'USER': 'admin',
-        'PASSWORD': '1234',
-        'HOST': '34.132.251.88',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"

@@ -12,6 +12,7 @@ def index(request):
         "category": category,
         "subcategory": subcategory,
         'obj': obj,
+        "title": {"Алконекит",}
     }
     return render(request, "../templates/alknekit/index.html", context)
 
@@ -31,7 +32,7 @@ def list_categories(request, category):
         "category": category,
         "subcategory": subcategory,
         'obj': obj,
-        "title":category
+        "title":category,
     }
     return render(request, "../templates/alknekit/catalog.html", context)
 
@@ -46,13 +47,13 @@ def list_subcategories(request, category, subcategory):
         obj = paginator.page(page)
     except:
         obj = paginator.page(1)
-    categoryprod = Category.objects.all()
-    subcategoryprod = Subcategory.objects.all()
+    category = Category.objects.all()
+    subcategory = Subcategory.objects.all()
     context = {
-        "category": categoryprod,
-        "subcategory": subcategoryprod,
+        "category": category,
+        "subcategory": subcategory,
         'obj': obj,
-        "title": category + " " + subcategory
+        "title": subcategory,
     }
     return render(request, "../templates/alknekit/catalog.html", context)
 
@@ -70,6 +71,14 @@ def product(request, product_id):
 
 
 def cart_show(request):
-    if request.session.session_key == None:
-        request.session.save()
-    return HttpResponse(request.session.session_key)
+    temp = []
+    for i in request.session["cart"]:
+        temp.append(Products.objects.filter(id=i["id"]))
+    return render(request, "../templates/alknekit/cart.html", {"prod": temp, "am": request.session["cart"]})
+
+def cart_add(request):
+    request.session["cart"] = [
+  {"id":1,"amount":2},
+  {"id":2, "amount":3}
+  ]
+    return HttpResponse(request.session["cart"])

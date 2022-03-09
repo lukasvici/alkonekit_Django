@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="{% static '/scss/style.css' %}">
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
     <link type="image/x-icon" rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
-    <title>nekitverst</title>
+    {% for i in title %}
+    <title>{{ i }}</title>
+    {% endfor %}
 </head>
 <body>
     <div class="main_box">
