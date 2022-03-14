@@ -95,10 +95,17 @@ def cart_show(request):
 
 @api_view(['POST'])
 def cart_add(request):
+    prodincart = False
     if request.session.session_key == None:
         request.session.save()
         request.session["cart"] = []
-    request.session["cart"].append(json.loads(json.dumps(request.data)))
-    request.session["cart"] = request.session["cart"]
-    print(request.session["cart"])
+    for i in request.session["cart"]:
+        if i["id"] == json.loads(json.dumps(request.data))["id"]:
+            print("уже есть")
+            prodincart = True
+            break
+    if prodincart == False:
+        request.session["cart"].append(json.loads(json.dumps(request.data)))
+        request.session["cart"] = request.session["cart"]
+        print(request.session["cart"])
     return Response(request.session["cart"])

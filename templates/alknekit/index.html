@@ -16,11 +16,12 @@
                         <br>
                     {% endif %}
                     <span style="color: red">{{ i.newprice }}₽</span></div>
-                <div class="buybutton"><button id="btn-buy" ><i class="fa fa-shopping-basket"></i></button></div>
+                <div class="buybutton"><button id="btn-buy" onClick="add({{ i.id }})" ><i class="fa fa-shopping-basket"></i></button></div>
             </div>
         </a>
         {% endfor %}
     </div>
 </div>
+    <form action="/test"><button>dadawfw</button></form>
 {% endblock %}
 
