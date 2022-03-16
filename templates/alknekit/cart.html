@@ -1,0 +1,39 @@
+{% extends 'alknekit/header.html' %}
+{% load static %}
+{% block products %}
+    <div class="container flex-cart">
+        <div class="products">
+            <p class="title-cart">Корзина</p>
+            {% for tmpprod in prod %}
+                {% for product in tmpprod %}
+            <div class="block" id="prod{{ product.id }}">
+                <div class="product-block">
+                    <img src="../../{{ product.mainimage }}" alt="" srcset="">
+                    <p class="title">{{ product.tittle }}</p>
+                </div>
+                <div class="amount">
+                    <button class="btn amount-minus" onClick="amountminus({{ product.id }})"><i class="fas fa-minus"></i></button>
+                    {% for x in am %}
+                        {% if x.id == product.id %}
+                    <p class="amount-number" id="amount{{ product.id }}">{{ x.amount }}</p>
+                        {% endif %}
+                        {% endfor %}
+                    <button class="btn amount-plus"  onClick="amountplus({{ product.id }})"><i class="fas fa-plus"></i></button>
+                </div>
+                    {% for i in priceprod %}
+                        {% if i.id == product.id %}
+                <div class="price" id="price{{ product.id }}"><p>{{ i.price }} ₽</p></div>
+                        {% endif %}
+                        {% endfor %}
+                                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+        <div class="buy-block">
+            <div class="block-top">
+                <p>Итого</p>
+                <p>{{ cartprice }} ₽</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

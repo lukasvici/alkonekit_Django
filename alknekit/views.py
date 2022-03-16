@@ -6,6 +6,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 import json
 
+lisca
 def checkcookie(request):
     if request.session.session_key == None:
         request.session.save()
@@ -101,12 +102,17 @@ def cart_show(request):
         temp.append(Products.objects.filter(id=int(i["id"])))
     category = Category.objects.all()
     subcategory = Subcategory.objects.all()
+    prodlistprice = []
+    for i in request.session["cart"]:
+        i["price"] = Products.objects.filter(id=i["id"])[0].newprice*i["amount"]
+        prodlistprice.append(i)
     context = {
         "category": category,
         "subcategory": subcategory,
         'prod': temp,
         "am": request.session["cart"],
-        "cartprice": getcartprice(request)
+        "cartprice": getcartprice(request),
+        "priceprod":prodlistprice
     }
     print(request.session["cart"])
     return render(request, "../templates/alknekit/cart.html", context)
