@@ -7,9 +7,9 @@
     <p class="title" style="text-align: center">Скидки</p>
     <div class="flex-sales">
         {% for i in obj %}
-            <a class="block" href="../../product/{{ i.id }}">
-                <div class="image-block"><img src="{{ i.mainimage }}" alt=""></div>
-            <div class="title"><p style="text-align: justify">{{ i.tittle }}</p></div>
+            <div class="block">
+                <a class="image-block"  href="../../product/{{ i.id }}"><img src="{{ i.mainimage }}" alt=""></a>
+            <a class="title"  href="../../product/{{ i.id }}"><p style="text-align: justify">{{ i.tittle }}</p></a>
             <div class="bottom">
                 <div class="price">{% if i.oldprice != 0 %}
                     <span style="color: #ACACAC">{{ i.oldprice }}₽</span>
@@ -18,10 +18,9 @@
                     <span style="color: red">{{ i.newprice }}₽</span></div>
                 <div class="buybutton"><button id="btn-buy" onClick="add({{ i.id }})" ><i class="fa fa-shopping-basket"></i></button></div>
             </div>
-        </a>
+        </div>
         {% endfor %}
     </div>
 </div>
-    <form action="/test"><button>dadawfw</button></form>
 {% endblock %}
 

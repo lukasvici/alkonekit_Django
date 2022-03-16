@@ -460,7 +460,6 @@ header {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  padding: 13px;
   width: 90%;
   margin: 0 auto;
 }
