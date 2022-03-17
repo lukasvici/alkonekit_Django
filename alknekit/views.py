@@ -6,8 +6,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 import json
 import telebot
-bot = telebot.TeleBot("5233868676:AAFbJBML227uGM7mEPVDrrKcFTjGLlM8s4U", parse_mode=None)
 
+bot = telebot.TeleBot("5233868676:AAFbJBML227uGM7mEPVDrrKcFTjGLlM8s4U", parse_mode=None)
 
 def checkcookie(request):
     if request.session.session_key == None:
@@ -75,7 +75,7 @@ def list_subcategories(request, category, subcategory):
         "category": category,
         "subcategory": subcategory,
         'obj': obj,
-        "title": category_id.title + " " + subcategory_id.title,
+        "title": category_id.title + subcategory_id.title,
         "cartprice": getcartprice(request)
     }
     return render(request, "../templates/alknekit/catalog.html", context)
@@ -97,15 +97,15 @@ def product(request, product_id):
 
 
 def cart_show(request):
-    prodlistprice = []
     checkcookie(request)
     temp = []
     for i in request.session["cart"]:
         temp.append(Products.objects.filter(id=int(i["id"])))
     category = Category.objects.all()
     subcategory = Subcategory.objects.all()
+    prodlistprice = []
     for i in request.session["cart"]:
-        i["price"] = Products.objects.filter(id=i["id"])[0].newprice * i["amount"]
+        i["price"] = Products.objects.filter(id=i["id"])[0].newprice*i["amount"]
         prodlistprice.append(i)
     context = {
         "category": category,
@@ -113,7 +113,8 @@ def cart_show(request):
         'prod': temp,
         "am": request.session["cart"],
         "cartprice": getcartprice(request),
-        "priceprod": prodlistprice
+        "priceprod":prodlistprice,
+        "title": "Корзина"
     }
     return render(request, "../templates/alknekit/cart.html", context)
 
@@ -125,7 +126,6 @@ def cart_add(request):
     prodincart = False
     for i in request.session["cart"]:
         if i["id"] == int(json.loads(json.dumps(request.data))["id"]):
-            print("уже есть")
             prodincart = True
             break
     if prodincart == False:
@@ -143,8 +143,8 @@ def prod_amount(request):
     newprod = ""
     temp = []
     for i in request.session["cart"]:
-        if i["id"] == int(request.data["id"]):
-            if request.data["type"] == "plus":
+        if i["id"] == int(json.loads(json.dumps(request.data))["id"]):
+            if json.loads(json.dumps(request.data))["type"] == "plus":
                 i["amount"] = int(i["amount"]) + 1
                 temp.append(i)
             else:
@@ -152,24 +152,25 @@ def prod_amount(request):
                 if i["amount"] > 0:
                     temp.append(i)
                 else:
-                    print("sfaw")
+                    pass
             newprod = i
         else:
             temp.append(i)
-    request.session["cart"] = temp
     newprod["allprice"] = getcartprice(request)
+    request.session["cart"] = temp
     return Response(newprod)
 
 
 @api_view(['POST'])
 def sendcart(request):
-    cart = "test"
+    cart = "test\n"
     for i in request.session["cart"]:
         prod = Products.objects.filter(id=i["id"])[0]
-        cart+="\n" + prod.tittle + ", " + str(prod.newprice) + "₽ " + str(i["amount"]) + "шт"
-    cart+="\n" + str(getcartprice(request)) + "₽"
+        cart+=prod.tittle + " " + str(prod.newprice) + "₽ " + str(i["amount"]) + "шт\n"
+    cart += str(getcartprice(request)) + "₽"
     send(cart)
-    return Response(None)
+    return Response(0)
+
 
 @bot.message_handler(func=lambda m: True)
 def send(message):

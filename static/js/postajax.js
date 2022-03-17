@@ -24,7 +24,6 @@ function amountminus(id){
 }
 
 function changepricecart(data){
-  console.log("dfafaw")
   $(".block-top p:last-child").text(data["allprice"]+"₽")
   $("#cart b").text(data["allprice"]+"₽")
 }
