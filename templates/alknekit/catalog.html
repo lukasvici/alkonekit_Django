@@ -5,9 +5,9 @@
     <div class="container sales">
     <div class="flex-sales">
         {% for i in obj %}
-            <a class="block" href="../../product/{{ i.id }}" style="border: 1px solid #E5E5E5;margin: 5px;">
-                <div class="image-block"><img src="../../{{ i.mainimage }}" alt=""></div>
-            <div class="title"><p style="text-align: justify">{{ i.tittle }}</p></div>
+            <div class="block" style="border: 1px solid #E5E5E5;margin: 5px;">
+                <a href="../../product/{{ i.id }}" class="image-block"><img src="../../{{ i.mainimage }}" alt=""></a>
+            <a href="../../product/{{ i.id }}" class="title"><p style="text-align: justify">{{ i.tittle }}</p></a>
             <div class="bottom">
                 <div class="price">
                     {% if i.oldprice != 0 %}
@@ -16,9 +16,9 @@
                     {% endif %}
                     <span style="color: red">{{ i.newprice }}₽</span>
                 </div>
-                <div class="buybutton"><button id="btn-buy"><i class="fa fa-shopping-basket"></i></button></div>
+                <div class="buybutton"><button onClick="add({{ i.id }})" id="btn-buy"><i class="fa fa-shopping-basket"></i></button></div>
             </div>
-        </a>
+        </div>
         {% endfor %}
     </div>
         <div class="block" style="display: flex; justify-content: space-between;width: 98%; margin: 0 auto;">

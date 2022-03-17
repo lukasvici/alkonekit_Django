@@ -30,7 +30,7 @@ def index(request):
         "category": category,
         "subcategory": subcategory,
         'obj': obj,
-        "title": {"Алконекит",},
+        "title": "",
         "cartprice": getcartprice(request)
     }
     return render(request, "../templates/alknekit/index.html", context)
@@ -52,7 +52,7 @@ def list_categories(request, category):
         "category": category,
         "subcategory": subcategory,
         'obj': obj,
-        "title":category,
+        "title":category_id.title,
         "cartprice": getcartprice(request)
     }
     return render(request, "../templates/alknekit/catalog.html", context)
@@ -75,7 +75,7 @@ def list_subcategories(request, category, subcategory):
         "category": category,
         "subcategory": subcategory,
         'obj': obj,
-        "title": subcategory,
+        "title": category_id.title + " " + subcategory_id.title,
         "cartprice": getcartprice(request)
     }
     return render(request, "../templates/alknekit/catalog.html", context)
@@ -90,7 +90,8 @@ def product(request, product_id):
         "category": category,
         "subcategory": subcategory,
         'obj': product,
-        "cartprice": getcartprice(request)
+        "cartprice": getcartprice(request),
+        "title": product[0].tittle
     }
     return render(request, "../templates/alknekit/product.html", context)
 

@@ -1,5 +1,5 @@
 function add(id){
-  $.post("../cartadd/", {"id":id, "amount":1},
+  $.post("../../cartadd/", {"id":id, "amount":1},
   function(data){
     if(data != ""){
       $(".cart b").text((parseInt($(".cart b").text()) + data["price"])+"₽");

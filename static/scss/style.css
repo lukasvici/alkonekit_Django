@@ -367,6 +367,9 @@ header {
   font-size: 20px;
   color: white;
   margin-left: 10px;
+  margin-right: 10px;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: bold;
 }
 
 .flex-header .socs-cart .cart:hover {
