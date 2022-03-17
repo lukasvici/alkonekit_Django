@@ -5,6 +5,9 @@ from django.http import HttpResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 import json
+import telebot
+bot = telebot.TeleBot("5233868676:AAFbJBML227uGM7mEPVDrrKcFTjGLlM8s4U", parse_mode=None)
+
 
 def checkcookie(request):
     if request.session.session_key == None:
@@ -16,7 +19,6 @@ def getcartprice(request):
     allprice = 0
     for i in request.session["cart"]:
         allprice += Products.objects.filter(id=int(json.loads(json.dumps(i))["id"]))[0].newprice*json.loads(json.dumps(i))["amount"]
-        print("fawfwafwa")
     return allprice
 
 def index(request):
@@ -94,21 +96,24 @@ def product(request, product_id):
 
 
 def cart_show(request):
+    prodlistprice = []
     checkcookie(request)
-    print(request.session["cart"])
     temp = []
     for i in request.session["cart"]:
         temp.append(Products.objects.filter(id=int(i["id"])))
     category = Category.objects.all()
     subcategory = Subcategory.objects.all()
+    for i in request.session["cart"]:
+        i["price"] = Products.objects.filter(id=i["id"])[0].newprice * i["amount"]
+        prodlistprice.append(i)
     context = {
         "category": category,
         "subcategory": subcategory,
         'prod': temp,
         "am": request.session["cart"],
-        "cartprice": getcartprice(request)
+        "cartprice": getcartprice(request),
+        "priceprod": prodlistprice
     }
-    print(request.session["cart"])
     return render(request, "../templates/alknekit/cart.html", context)
 
 
@@ -129,7 +134,6 @@ def cart_add(request):
         product_json["price"] = Products.objects.filter(id=int(json.loads(json.dumps(request.data))["id"]))[0].newprice
         request.session["cart"].append(product_json)
         request.session["cart"] = request.session["cart"]
-        print(request.session["cart"])
     return Response(product_json)
 
 @api_view(['POST'])
@@ -138,8 +142,8 @@ def prod_amount(request):
     newprod = ""
     temp = []
     for i in request.session["cart"]:
-        if i["id"] == int(json.loads(json.dumps(request.data))["id"]):
-            if json.loads(json.dumps(request.data))["type"] == "plus":
+        if i["id"] == int(request.data["id"]):
+            if request.data["type"] == "plus":
                 i["amount"] = int(i["amount"]) + 1
                 temp.append(i)
             else:
@@ -151,6 +155,21 @@ def prod_amount(request):
             newprod = i
         else:
             temp.append(i)
-
     request.session["cart"] = temp
+    newprod["allprice"] = getcartprice(request)
     return Response(newprod)
+
+
+@api_view(['POST'])
+def sendcart(request):
+    cart = "test"
+    for i in request.session["cart"]:
+        prod = Products.objects.filter(id=i["id"])[0]
+        cart+="\n" + prod.tittle + ", " + str(prod.newprice) + "₽ " + str(i["amount"]) + "шт"
+    cart+="\n" + str(getcartprice(request)) + "₽"
+    send(cart)
+    return Response(None)
+
+@bot.message_handler(func=lambda m: True)
+def send(message):
+    bot.send_message(648136076, message)

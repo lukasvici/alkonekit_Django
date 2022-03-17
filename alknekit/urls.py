@@ -8,5 +8,5 @@ urlpatterns = [
     path('amount/', views.prod_amount, name='amount'),
     path('Catalog/<str:category>/', views.list_categories, name='catalog'),
     path('Catalog/<str:category>/<str:subcategory>', views.list_subcategories, name='subcatalog'),
-
+    path('sendtelegram/', views.sendcart, name='telegramsend'),
 ]
